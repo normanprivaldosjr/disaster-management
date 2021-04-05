@@ -15,4 +15,8 @@ class Region extends Model
     public function groups(){
         return $this->hasMany(Group::class);
     }
+
+    public function contacts(){
+        return $this->hasMany(Contact::class);
+    }
 }

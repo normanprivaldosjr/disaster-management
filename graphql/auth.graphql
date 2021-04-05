@@ -1,0 +1,12 @@
+type AuthPayload {
+    access_token: String
+    refresh_token: String
+    expires_in: Int
+    token_type: String
+    user: User
+}
+
+input SocialLoginInput {
+    provider: String! @rules(apply: ["required"])
+    access_token: String! @rules(apply: ["required"])
+}

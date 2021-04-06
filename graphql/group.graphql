@@ -5,6 +5,7 @@ extend type Query {
 
 extend type Mutation {
     createGroup(input: GroupCreateInput @spread): Group @field(resolver:"GroupMutator@create")
+    joinGroup(input: JoinInput @spread): Group @field(resolver: "GroupMutator@join")
 }
 
 type Group {
@@ -20,4 +21,9 @@ input GroupCreateInput {
     name: String!
     region_id: ID!
     user_id: ID!
+}
+
+input JoinInput {
+    user_id: ID!
+    group_id: ID!
 }

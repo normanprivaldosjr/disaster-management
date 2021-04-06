@@ -9,7 +9,7 @@ class Region extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'place',
+        'region',
     ];
 
     public function groups(){

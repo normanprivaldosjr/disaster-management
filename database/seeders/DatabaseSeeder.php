@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             SourceSeeder::class,
             ContactSeeder::class,
             RequestSeeder::class,
+            GroupUserSeeder::class
         ]);
     }
 }

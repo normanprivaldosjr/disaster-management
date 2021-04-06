@@ -12,11 +12,13 @@ class Region extends Model
         'region',
     ];
 
-    public function groups(){
+    public function groups()
+    {
         return $this->hasMany(Group::class);
     }
 
-    public function contacts(){
+    public function contacts()
+    {
         return $this->hasMany(Contact::class);
     }
 }

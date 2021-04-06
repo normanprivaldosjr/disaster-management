@@ -19,15 +19,20 @@ class Group extends Model
         'region_id',
     ];
 
-    public function region(){
+    public function region()
+    {
         return $this->belongsTo(Region::class);
     }
 
-    public function requests(){
+    public function requests()
+    {
         return $this->hasMany(Request::class);
     }
 
-    public function users(){
-        return $this->belongsToMany(User::class,'group_user');
+    public function users()
+    {
+        return $this->belongsToMany(User::class)
+            ->withTimestamps()
+            ->withPivot(['creator']);
     }
 }

@@ -1,0 +1,11 @@
+extend type Query {
+    regions: [Region!]! @all
+    region(id: ID @eq): Region @find
+}
+
+type Region {
+    id: ID
+    place: String
+    created_at: DateTime
+    updated_at: DateTime
+}

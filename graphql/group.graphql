@@ -1,0 +1,23 @@
+extend type Query {
+    groups: [Group!]! @all
+    group(id: ID @eq): Group @find
+}
+
+extend type Mutation {
+    createGroup(input: GroupCreateInput @spread): Group @field(resolver:"GroupMutator@create")
+}
+
+type Group {
+    id: ID
+    name: String
+    users: [User] @belongsToMany
+    region: Region
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+input GroupCreateInput {
+    name: String!
+    region_id: ID!
+    user_id: ID!
+}

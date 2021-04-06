@@ -9,7 +9,7 @@ type Query {
     user(id: ID @eq): User @find
 }
 
-extend type Mutation {
+type Mutation {
     socialLogin(input: SocialLoginInput! @spread): AuthPayload! @field(resolver: "SocialLoginMutator@resolve")
 }
 
@@ -17,8 +17,17 @@ type User {
     id: ID!
     name: String!
     email: String!
+    pivot: GroupUserPivot
     created_at: DateTime!
     updated_at: DateTime!
 }
 
+type GroupUserPivot {
+    creator: Boolean
+    created_at: DateTime
+    updated_at: DateTime
+}
+
 #import auth.graphql
+#import group.graphql
+#import region.graphql

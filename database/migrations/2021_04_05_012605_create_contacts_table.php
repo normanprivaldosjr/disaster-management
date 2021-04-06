@@ -15,11 +15,10 @@ class CreateContactsTable extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->unsignedBigInteger('region_id');
-            $table->foreign('region_id')->references('id')->on('regions');
+            $table->foreignId('region_id')->constrained();
             $table->string('contact_no');
             $table->string('rescuers');
+            $table->timestamps();
         });
     }
 

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\Group;
 use App\Models\User;
-
+use Carbon\Carbon;
 
 class GroupUserSeeder extends Seeder
 {
@@ -33,7 +33,9 @@ class GroupUserSeeder extends Seeder
                     DB::table('group_user')->insert([
                         'user_id' => $user_id,
                         'group_id' => $group_id,
-                        'creator' => (bool)rand(0, 1)
+                        'creator' => (bool)rand(0, 1),
+                        'created_at' => date("Y-m-d H:i:s"),
+                        'updated_at' => date("Y-m-d H:i:s"),        
                     ]);
                 }
             }

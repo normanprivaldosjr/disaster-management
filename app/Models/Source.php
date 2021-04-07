@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Source extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'source',
     ];
 
-    public function requests(){
-       return $this->hasMany(Request::class);
+    public function requests()
+    {
+        return $this->hasMany(Request::class);
     }
-
 }

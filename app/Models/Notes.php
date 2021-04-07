@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Notes extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'request_id',
         'user_id',
@@ -19,8 +20,8 @@ class Notes extends Model
         return $this->belongsTo(Request::class);
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
-
 }

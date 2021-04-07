@@ -6,6 +6,11 @@ type AuthPayload {
     user: User
 }
 
+type LogoutResponse {
+    status: String
+    message: String
+}
+
 input SocialLoginInput {
     provider: String! @rules(apply: ["required"])
     access_token: String! @rules(apply: ["required"])

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Request extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'user_id',
         'status_id',
@@ -19,19 +20,23 @@ class Request extends Model
         'contact_number',
     ];
 
-    public function source(){
-       return $this->belongsTo(Source::class);
+    public function source()
+    {
+        return $this->belongsTo(Source::class);
     }
 
-    public function notes(){
+    public function notes()
+    {
         return $this->hasMany(Note::class);
     }
 
-    public function groups(){
+    public function groups()
+    {
         return $this->belongsTo(Group::class);
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }

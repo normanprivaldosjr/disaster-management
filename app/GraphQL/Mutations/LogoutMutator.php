@@ -2,14 +2,14 @@
 
 namespace App\GraphQL\Mutations;
 
+use App\Exceptions\AuthenticationException;
 use App\GraphQL\Resolvers\BaseAuthResolver;
-use App\GraphQL\Resolvers\SocialUserResolver;
-use App\Models\User;
+use App\Models\AuditTrail;
 use GraphQL\Type\Definition\ResolveInfo;
 use Illuminate\Support\Facades\Auth;
 use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 
-class SocialLoginMutator extends BaseAuthResolver
+class LogoutMutator extends BaseAuthResolver
 {
     /**
      * @param $rootValue
@@ -23,18 +23,19 @@ class SocialLoginMutator extends BaseAuthResolver
      */
     public function resolve($rootValue, array $args, GraphQLContext $context = null, ResolveInfo $resolveInfo)
     {
-        $credentials = $this->buildCredentials($args, 'social');
+        if (!Auth::guard('api')->check()) {
+            throw new AuthenticationException('Not Authenticated', 'Not Authenticated');
+        }
 
-        $social = new SocialUserResolver();
-        $user = $social->resolveUserByProviderCredentials($credentials['provider'], $credentials['access_token']);
+        $user = Auth::guard('api')->user();
 
-        $response = $this->makeRequest($credentials);
+        Auth::guard('api')->user()->token()->revoke();
 
-        Auth::setUser($user);
+        AuditTrail::log($user->id, 'Logged out');
 
-        $user = User::where('id', Auth::user()->id)->firstOrFail();
-        $response['user'] = $user;
-
-        return $response;
+        return [
+            'status'  => 'TOKEN_REVOKED',
+            'message' => __('Your session has been terminated'),
+        ];
     }
 }

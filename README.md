@@ -30,6 +30,8 @@ Setup
         DB_DATABASE
         DB_USERNAME
         DB_PASSWORD
+        
+        BROADCAST_DRIVER=pusher
 
         GOOGLE_CLIENT_ID
         GOOGLE_CLIENT_SECRET
@@ -38,6 +40,11 @@ Setup
         FACEBOOK_APP_ID
         FACEBOOK_APP_SECRET
         FACEBOOK_APP_REDIRECT
+
+        PUSHER_APP_ID
+        PUSHER_APP_KEY
+        PUSHER_APP_SECRET
+        PUSHER_APP_CLUSTER
     ```
 6. Run this command:
     ```sh

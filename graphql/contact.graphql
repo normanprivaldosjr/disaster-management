@@ -1,0 +1,13 @@
+extend type Query {
+    contacts: [Contact!]! @all
+    contact(id: ID @eq): Contact @find
+}
+
+type Contact {
+    id: ID
+    region: Region @belongsTo
+    contact_no: String
+    rescuers: String
+    created_at: DateTime
+    updated_at: DateTime
+}

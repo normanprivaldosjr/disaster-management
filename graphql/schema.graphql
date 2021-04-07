@@ -31,3 +31,4 @@ type GroupUserPivot {
 #import auth.graphql
 #import group.graphql
 #import region.graphql
+#import contact.graphql

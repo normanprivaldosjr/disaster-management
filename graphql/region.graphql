@@ -6,6 +6,7 @@ extend type Query {
 type Region {
     id: ID
     region: String
+    contacts: [Contact] @hasMany
     created_at: DateTime
     updated_at: DateTime
 }

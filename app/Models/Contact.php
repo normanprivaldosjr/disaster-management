@@ -8,13 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Contact extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'region_id',
         'contact_no',
         'rescuers'
     ];
 
-    public function region(){
+    public function region()
+    {
         return $this->belongsTo(Region::class);
     }
 }

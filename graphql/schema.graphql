@@ -11,6 +11,7 @@ type Query {
 
 type Mutation {
     socialLogin(input: SocialLoginInput! @spread): AuthPayload! @field(resolver: "SocialLoginMutator@resolve")
+    logout: LogoutResponse! @field(resolver: "LogoutMutator@resolve")
 }
 
 type User {

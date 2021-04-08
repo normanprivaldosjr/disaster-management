@@ -29,7 +29,7 @@ class SocialUserResolver implements SocialUserResolverInterface
         try {
             $social = Socialite::driver($provider)->userFromToken($accessToken);
         } catch (\Exception $e) {
-            throw new \Exception(__('Token is invalid or expired. Please try relogin again.'), 400);
+            throw new \Exception(__('Invalid Provider or Token. Please try relogin again.'), 400);
         }
 
         // Find or Create a user.

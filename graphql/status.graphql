@@ -1,0 +1,11 @@
+extend type Query {
+    statuses: [Status!]! @all
+    status(id: ID @eq): Status @find
+}
+
+type Status {
+    id: ID
+    status: String
+    created_at: DateTime
+    updated_at: DateTime
+}

@@ -33,3 +33,5 @@ type GroupUserPivot {
 #import group.graphql
 #import region.graphql
 #import contact.graphql
+#import source.graphql
+#import status.graphql

@@ -1,0 +1,11 @@
+extend type Query {
+    sources: [Source!]! @all
+    source(id: ID @eq): Source @find
+}
+
+type Source {
+    id: ID
+    source: String
+    created_at: DateTime
+    updated_at: DateTime
+}

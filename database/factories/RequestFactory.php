@@ -22,7 +22,6 @@ class RequestFactory extends Factory
     public function definition()
     {
         return [
-            'priority' => rand(1,5),
             'number_to_be_rescued' => rand(1,5),
             'address' => $this->faker->address,
             'contact_number' => $this->faker->phoneNumber

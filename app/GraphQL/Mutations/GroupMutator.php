@@ -6,6 +6,7 @@ use App\GraphQL\Resolvers\BaseAuthResolver;
 use App\Models\Group;
 use GraphQL\Type\Definition\ResolveInfo;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
 use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 
 class GroupMutator extends BaseAuthResolver
@@ -25,8 +26,10 @@ class GroupMutator extends BaseAuthResolver
         $args = collect($args);
         $data = $args->except('directive', 'user')->toArray();
 
+        $user = Auth::user();
+
         $group = Group::create($data);
-        $group->users()->attach($args->get('user_id'), ['creator' => 1]);
+        $group->users()->attach($user->id, ['creator' => 1]);
 
         return $group;
     }
@@ -46,9 +49,11 @@ class GroupMutator extends BaseAuthResolver
         $args = collect($args);
         $group = null;
 
+        $user = Auth::user();
+
         try {
             $group = Group::findOrFail($args->get('group_id'));
-            $group->users()->attach($args->get('user_id'));
+            $group->users()->attach($user->id);
         } catch (ModelNotFoundException $e) {
             throw new ModelNotFoundException(__('Group not found.'), 400);
         }

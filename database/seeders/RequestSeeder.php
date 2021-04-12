@@ -21,6 +21,7 @@ class RequestSeeder extends Seeder
         $groups = DB::table('groups')->count();
         for($x = 0; $x < 25; $x++){
             Request::factory()->create([
+                'priority' => 'pregnant,child,senior_citizen',
                 'user_id' => rand(1,$users),
                 'status_id' => rand(1,$status),
                 'source_id' => rand(1,$sources),

@@ -20,10 +20,8 @@ type Group {
 input GroupCreateInput {
     name: String!
     region_id: ID!
-    user_id: ID!
 }
 
 input JoinInput {
-    user_id: ID!
     group_id: ID!
 }

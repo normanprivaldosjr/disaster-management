@@ -23,7 +23,7 @@ class RequestMutator extends BaseAuthResolver
     public function create($rootValue, array $args, GraphQLContext $context = null, ResolveInfo $resolveInfo)
     {
         $args = collect($args);
-        $data = $args->toArray();
+        $data = $args->except('directive', 'user')->toArray();
         $request = Request::create($data);
         return $request;
     }
@@ -32,8 +32,9 @@ class RequestMutator extends BaseAuthResolver
     {
       try{
         $args = collect($args);
-        $request = Request::findOrFail($args->get('id'));
-        $request->update($args->toArray());
+        $data = $args->except('directive', 'user')->toArray();
+        $request = Request::findOrFail($data['id']);
+        $request->update($data);
       }catch (ModelNotFoundException $e) {
         throw new ModelNotFoundException(__('Request not found.'), 400);
       }

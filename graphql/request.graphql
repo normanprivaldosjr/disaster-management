@@ -5,7 +5,7 @@ extend type Query {
 }
 
 extend type Mutation {
-    createRequest(input: RequestInput @spread): Request @field(resolver: "RequestMutator@create")
+    createRequest(input: CreateRequestInput @spread): Request @field(resolver: "RequestMutator@create")
     updateRequest(input: UpdateRequestInput @spread): Request @field(resolver: "RequestMutator@update")
     deleteRequest(id: ID!): Request @field(resolver: "RequestMutator@delete")
 }

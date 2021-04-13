@@ -4,8 +4,8 @@ extend type Query {
 }
 
 extend type Mutation {
-    createGroup(input: GroupCreateInput @spread): Group @field(resolver:"GroupMutator@create")
-    joinGroup(input: JoinInput @spread): Group @field(resolver: "GroupMutator@join")
+    createGroup(input: CreateGroupInput @spread): Group @field(resolver: "GroupMutator@create")
+    joinGroup(input: JoinGroupInput @spread): Group @field(resolver: "GroupMutator@join")
 }
 
 type Group {
@@ -17,11 +17,11 @@ type Group {
     updated_at: DateTime
 }
 
-input GroupCreateInput {
+input CreateGroupInput {
     name: String!
     region_id: ID!
 }
 
-input JoinInput {
+input JoinGroupInput {
     group_id: ID!
 }

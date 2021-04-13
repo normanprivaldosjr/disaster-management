@@ -3,13 +3,11 @@
 namespace App\GraphQL\Mutations;
 
 use App\Exceptions\AuthenticationException;
-use App\GraphQL\Resolvers\BaseAuthResolver;
-use App\Models\AuditTrail;
 use GraphQL\Type\Definition\ResolveInfo;
 use Illuminate\Support\Facades\Auth;
 use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 
-class LogoutMutator extends BaseAuthResolver
+class LogoutMutator
 {
     /**
      * @param $rootValue
@@ -30,8 +28,6 @@ class LogoutMutator extends BaseAuthResolver
         $user = Auth::guard('api')->user();
 
         Auth::guard('api')->user()->token()->revoke();
-
-        AuditTrail::log($user->id, 'Logged out');
 
         return [
             'status'  => 'TOKEN_REVOKED',

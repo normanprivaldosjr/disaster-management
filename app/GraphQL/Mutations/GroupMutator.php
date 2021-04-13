@@ -2,14 +2,13 @@
 
 namespace App\GraphQL\Mutations;
 
-use App\GraphQL\Resolvers\BaseAuthResolver;
 use App\Models\Group;
 use GraphQL\Type\Definition\ResolveInfo;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 
-class GroupMutator extends BaseAuthResolver
+class GroupMutator
 {
     /**
      * @param $rootValue
@@ -24,7 +23,7 @@ class GroupMutator extends BaseAuthResolver
     public function create($rootValue, array $args, GraphQLContext $context = null, ResolveInfo $resolveInfo)
     {
         $args = collect($args);
-        $data = $args->except('directive', 'user')->toArray();
+        $data = $args->except('directive')->toArray();
 
         $user = Auth::user();
 

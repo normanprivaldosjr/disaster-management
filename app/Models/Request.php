@@ -45,4 +45,9 @@ class Request extends Model
     {
         return $this->belongsTo(Status::class);
     }
+
+    public function scopeByStatus($query, $status)
+    {
+        return $query->where('status_id', '=', $status);
+    }
 }

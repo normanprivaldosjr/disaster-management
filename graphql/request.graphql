@@ -1,12 +1,13 @@
 extend type Query {
     requests: [Request!]! @all
     request(id: ID @eq): Request @find
+    newRequestCount: Int @field(resolver: "RequestQuery@newRequestCount")
 }
 
 extend type Mutation {
-  createRequest(input: RequestInput @spread): Request @field(resolver:"RequestMutator@create")
-  updateRequest(input: UpdateRequestInput @spread): Request @field(resolver:"RequestMutator@update")
-  deleteRequest(id: ID!): Request @field(resolver:"RequestMutator@delete")
+    createRequest(input: CreateRequestInput @spread): Request @field(resolver: "RequestMutator@create")
+    updateRequest(input: UpdateRequestInput @spread): Request @field(resolver: "RequestMutator@update")
+    deleteRequest(id: ID!): Request @field(resolver: "RequestMutator@delete")
 }
 
 type Request {
@@ -23,25 +24,25 @@ type Request {
     updated_at: DateTime
 }
 
-input RequestInput {
-  user_id: ID!
-  status_id: ID!
-  source_id: ID!
-  group_id: ID!
-  priority: String!
-  number_to_be_rescued: Int
-  address: String!
-  contact_number: String!
+input CreateRequestInput {
+    user_id: ID!
+    status_id: ID!
+    source_id: ID!
+    group_id: ID!
+    priority: String!
+    number_to_be_rescued: Int
+    address: String!
+    contact_number: String!
 }
 
 input UpdateRequestInput {
-  id: ID!
-  user_id: ID
-  status_id: ID
-  source_id: ID
-  group_id: ID
-  priority: String
-  number_to_be_rescued: Int
-  address: String
-  contact_number: String
+    id: ID!
+    user_id: ID
+    status_id: ID
+    source_id: ID
+    group_id: ID
+    priority: String
+    number_to_be_rescued: Int
+    address: String
+    contact_number: String
 }

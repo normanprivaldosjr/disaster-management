@@ -1,9 +1,9 @@
-extend type Query {
+extend type Query @guard(with: ["api"]) {
     sources: [Source!]! @all
     source(id: ID @eq): Source @find
 }
 
-extend type Mutation {
+extend type Mutation @guard(with: ["api"]) {
     createSource(input: CreateSourceInput @spread): Source @field(resolver:"SourceMutator@create")
     updateSource(input: UpdateSourceInput @spread): Source @field(resolver:"SourceMutator@update")
 }

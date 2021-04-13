@@ -30,7 +30,7 @@ class Request extends Model
         return $this->hasMany(Note::class);
     }
 
-    public function groups()
+    public function group()
     {
         return $this->belongsTo(Group::class);
     }
@@ -38,5 +38,10 @@ class Request extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
     }
 }

@@ -3,9 +3,24 @@ extend type Query {
     source(id: ID @eq): Source @find
 }
 
+extend type Mutation {
+  createSource(input: CreateSourceInput @spread): Source @field(resolver:"SourceMutator@create")
+  updateSource(input: UpdateSourceInput @spread): Source @field(resolver:"SourceMutator@update")
+}
+
+
 type Source {
     id: ID
     source: String
     created_at: DateTime
     updated_at: DateTime
+}
+
+input CreateSourceInput {
+    source: String!
+}
+
+input UpdateSourceInput {
+    id: ID!
+    source: String
 }

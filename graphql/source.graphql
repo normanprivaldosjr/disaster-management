@@ -4,8 +4,8 @@ extend type Query {
 }
 
 extend type Mutation {
-  createSource(input: CreateSourceInput @spread): Source @field(resolver:"SourceMutator@create")
-  updateSource(input: UpdateSourceInput @spread): Source @field(resolver:"SourceMutator@update")
+    createSource(input: CreateSourceInput @spread): Source @field(resolver:"SourceMutator@create")
+    updateSource(input: UpdateSourceInput @spread): Source @field(resolver:"SourceMutator@update")
 }
 
 

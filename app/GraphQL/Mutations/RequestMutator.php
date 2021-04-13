@@ -40,4 +40,17 @@ class RequestMutator extends BaseAuthResolver
       }
         return $request;
     }
+
+    public function delete($rootValue, array $args, GraphQLContext $context = null, ResolveInfo $resolveInfo)
+    {
+      try{
+        $args = collect($args);
+        $data = $args->except('directive', 'user')->toArray();
+        $request = Request::findOrFail($data['id']);
+        $request->delete($data);
+      }catch (ModelNotFoundException $e) {
+        throw new ModelNotFoundException(__('Request not found.'), 400);
+      }
+        return $request;
+    }
 }

@@ -4,14 +4,14 @@ scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 "A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
 scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
-type Query {
+type Query @guard(with: ["api"]) {
     users: [User!]! @paginate(defaultCount: 10)
     user(id: ID @eq): User @find
 }
 
 type Mutation {
     socialLogin(input: SocialLoginInput! @spread): AuthPayload! @field(resolver: "SocialLoginMutator@resolve")
-    logout: LogoutResponse! @field(resolver: "LogoutMutator@resolve")
+    logout: LogoutResponse! @guard(with: ["api"]) @field(resolver: "LogoutMutator@resolve")
 }
 
 type User {

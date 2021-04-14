@@ -1,10 +1,10 @@
-extend type Query {
+extend type Query @guard(with: ["api"]) {
     requests: [Request!]! @all
     request(id: ID @eq): Request @find
     newRequestCount: Int @field(resolver: "RequestQuery@newRequestCount")
 }
 
-extend type Mutation {
+extend type Mutation @guard(with: ["api"]) {
     createRequest(input: CreateRequestInput @spread): Request @field(resolver: "RequestMutator@create")
     updateRequest(input: UpdateRequestInput @spread): Request @field(resolver: "RequestMutator@update")
     deleteRequest(id: ID!): Request @field(resolver: "RequestMutator@delete")

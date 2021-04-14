@@ -36,3 +36,4 @@ type GroupUserPivot {
 #import source.graphql
 #import status.graphql
 #import request.graphql
+#import note.graphql

@@ -1,0 +1,33 @@
+extend type Query {
+    notes: [Note!]! @all
+    note(id: ID @eq): Note @find
+}
+
+extend type Mutation {
+    createNote(input: CreateNoteInput @spread): Note @field(resolver: "NoteMutator@create")
+    updateNote(input: UpdateNoteInput @spread): Note @field(resolver: "NoteMutator@update")
+    deleteNote(id: ID!): Note @field(resolver: "NoteMutator@delete")
+}
+
+
+type Note {
+    id: ID
+    user: User @belongsTo
+    request: Request @belongsTo
+    note: String
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+input CreateNoteInput {
+  request_id: ID!
+  user_id: ID!
+  note: String!
+}
+
+input UpdateNoteInput {
+  id: ID!
+  request_id: ID
+  user_id: ID
+  note: String
+}

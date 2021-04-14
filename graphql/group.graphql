@@ -1,9 +1,9 @@
-extend type Query {
+extend type Query @guard(with: ["api"]) {
     groups: [Group!]! @all
     group(id: ID @eq): Group @find
 }
 
-extend type Mutation {
+extend type Mutation @guard(with: ["api"]) {
     createGroup(input: CreateGroupInput @spread): Group @field(resolver: "GroupMutator@create")
     joinGroup(input: JoinGroupInput @spread): Group @field(resolver: "GroupMutator@join")
 }

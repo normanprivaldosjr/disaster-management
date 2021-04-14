@@ -1,4 +1,4 @@
-extend type Query {
+extend type Query @guard(with: ["api"]) {
     statuses: [Status!]! @all
     status(id: ID @eq): Status @find
 }

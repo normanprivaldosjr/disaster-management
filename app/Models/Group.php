@@ -29,6 +29,11 @@ class Group extends Model
         return $this->hasMany(Request::class);
     }
 
+    public function newRequests()
+    {
+        return $this->requests()->where('status_id', '=', 1);
+    }
+
     public function users()
     {
         return $this->belongsToMany(User::class)

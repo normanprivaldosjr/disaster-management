@@ -56,4 +56,20 @@ class BaseAuthResolver
 
         return $decodedResponse;
     }
+
+    /**
+     * @param string $status
+     * @param string $message
+     * @param object $data
+     *
+     * @return mixed
+     */
+    public function apiResponse(string $status, string $message = '', object $data = null)
+    {
+        return [
+            'status' => $status,
+            'message' => $message,
+            'data' => $data
+        ];
+    }
 }

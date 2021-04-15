@@ -4,8 +4,10 @@ extend type Query @guard(with: ["api"]) {
 }
 
 extend type Mutation @guard(with: ["api"]) {
-    createGroup(input: CreateGroupInput @spread): Group @field(resolver: "GroupMutator@create")
-    joinGroup(input: JoinGroupInput @spread): Group @field(resolver: "GroupMutator@join")
+    createGroup(input: CreateGroupInput @spread): GroupResponse @field(resolver: "GroupMutator@create")
+    updateGroup(input: UpdateGroupInput @spread): GroupResponse @field(resolver: "GroupMutator@update")
+    joinGroup(input: JoinGroupInput @spread): GroupResponse @field(resolver: "GroupMutator@join")
+    leaveGroup(input: JoinGroupInput @spread): GroupResponse @field(resolver: "GroupMutator@leave")
 }
 
 type Group {
@@ -13,13 +15,26 @@ type Group {
     name: String
     users: [User] @belongsToMany
     region: Region
+    requestCount: Int @count(relation: "newRequests")
     created_at: DateTime
     updated_at: DateTime
 }
 
+type GroupResponse {
+    status: String
+    message: String
+    data: Group
+}
+
 input CreateGroupInput {
-    name: String!
     region_id: ID!
+    name: String!
+}
+
+input UpdateGroupInput {
+    group_id: ID!
+    region_id: ID
+    name: String
 }
 
 input JoinGroupInput {

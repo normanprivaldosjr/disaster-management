@@ -34,6 +34,6 @@ class NewRequest
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('request.' . $this->request->group_id);
+        return new PrivateChannel('group.' . $this->request->group_id);
     }
 }

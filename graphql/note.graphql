@@ -1,14 +1,13 @@
-extend type Query @guard(with: ["api"]){
+extend type Query @guard(with: ["api"]) {
     notes: [Note!]! @all
     note(id: ID @eq): Note @find
 }
 
-extend type Mutation @guard(with: ["api"]){
+extend type Mutation @guard(with: ["api"]) {
     createNote(input: CreateNoteInput @spread): Note @field(resolver: "NoteMutator@create")
     updateNote(input: UpdateNoteInput @spread): Note @field(resolver: "NoteMutator@update")
     deleteNote(id: ID!): Note @field(resolver: "NoteMutator@delete")
 }
-
 
 type Note {
     id: ID
@@ -20,14 +19,14 @@ type Note {
 }
 
 input CreateNoteInput {
-  request_id: ID!
-  user_id: ID!
-  note: String!
+    request_id: ID!
+    user_id: ID!
+    note: String!
 }
 
 input UpdateNoteInput {
-  id: ID!
-  request_id: ID
-  user_id: ID
-  note: String
+    id: ID!
+    request_id: ID
+    user_id: ID
+    note: String
 }

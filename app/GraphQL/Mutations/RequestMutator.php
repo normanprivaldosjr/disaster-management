@@ -2,6 +2,7 @@
 
 namespace App\GraphQL\Mutations;
 
+use App\Events\NewRequest;
 use App\Models\Request;
 use GraphQL\Type\Definition\ResolveInfo;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -26,9 +27,21 @@ class RequestMutator
 
         $request = Request::create($data);
 
+        broadcast(new NewRequest($request))->toOthers();
+
         return $request;
     }
 
+    /**
+     * @param $rootValue
+     * @param array                                                    $args
+     * @param \Nuwave\Lighthouse\Support\Contracts\GraphQLContext|null $context
+     * @param \GraphQL\Type\Definition\ResolveInfo                     $resolveInfo
+     *
+     * @throws \Exception
+     *
+     * @return array
+     */
     public function update($rootValue, array $args, GraphQLContext $context = null, ResolveInfo $resolveInfo)
     {
         try {
@@ -44,6 +57,16 @@ class RequestMutator
         return $request;
     }
 
+    /**
+     * @param $rootValue
+     * @param array                                                    $args
+     * @param \Nuwave\Lighthouse\Support\Contracts\GraphQLContext|null $context
+     * @param \GraphQL\Type\Definition\ResolveInfo                     $resolveInfo
+     *
+     * @throws \Exception
+     *
+     * @return array
+     */
     public function delete($rootValue, array $args, GraphQLContext $context = null, ResolveInfo $resolveInfo)
     {
         try {

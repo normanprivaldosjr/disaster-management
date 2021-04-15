@@ -1,7 +1,6 @@
 extend type Query @guard(with: ["api"]) {
     requests: [Request!]! @all
     request(id: ID @eq): Request @find
-    newRequestCount: Int @field(resolver: "RequestQuery@newRequestCount")
 }
 
 extend type Mutation @guard(with: ["api"]) {

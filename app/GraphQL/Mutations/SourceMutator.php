@@ -29,6 +29,16 @@ class SourceMutator
         return $source;
     }
 
+    /**
+     * @param $rootValue
+     * @param array                                                    $args
+     * @param \Nuwave\Lighthouse\Support\Contracts\GraphQLContext|null $context
+     * @param \GraphQL\Type\Definition\ResolveInfo                     $resolveInfo
+     *
+     * @throws \Exception
+     *
+     * @return array
+     */
     public function update($rootValue, array $args, GraphQLContext $context = null, ResolveInfo $resolveInfo)
     {
         try {

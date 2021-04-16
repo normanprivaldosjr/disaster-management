@@ -15,15 +15,20 @@ class Request extends Model
         'status_id',
         'source_id',
         'group_id',
-        'priority',
         'number_to_be_rescued',
         'address',
         'contact_number',
     ];
 
-    public function source()
+    public function group()
     {
-        return $this->belongsTo(Source::class);
+        return $this->belongsTo(Group::class);
+    }
+
+    public function priorities()
+    {
+        return $this->belongsToMany(Priority::class, 'priority_request')
+            ->withTimestamps();
     }
 
     public function notes()
@@ -31,14 +36,9 @@ class Request extends Model
         return $this->hasMany(Note::class);
     }
 
-    public function group()
+    public function source()
     {
-        return $this->belongsTo(Group::class);
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Source::class);
     }
 
     public function status()
@@ -46,8 +46,32 @@ class Request extends Model
         return $this->belongsTo(Status::class);
     }
 
-    public function scopeByStatus($query, $status)
+    public function user()
     {
-        return $query->where('status_id', '=', $status);
+        return $this->belongsTo(User::class);
+    }
+
+    public function scopeByPriority($query, $priorities)
+    {
+        if (empty($priorities)) {
+            return $query;
+        }
+
+        foreach ($priorities as $priority) {
+            $query->whereHas('priorities', function ($query) use ($priority) {
+                return $query->where('priority_id', $priority);
+            });
+        }
+
+        return $query;
+    }
+
+    public function scopeByStatus($query, $status_id)
+    {
+        if (!$status_id) {
+            return $query;
+        }
+
+        return $query->where('status_id', '=', $status_id);
     }
 }

@@ -12,16 +12,16 @@ use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 class SourceMutator extends BaseAuthResolver
 {
     /**
-     * @param $rootValue
-     * @param array                                                    $args
-     * @param \Nuwave\Lighthouse\Support\Contracts\GraphQLContext|null $context
-     * @param \GraphQL\Type\Definition\ResolveInfo                     $resolveInfo
+     * Return a value for the field.
      *
-     * @throws \Exception
-     *
-     * @return array
+     * @param  @param  null  $root Always null, since this field has no parent.
+     * @param  array<string, mixed>  $args The field arguments passed by the client.
+     * @param  \Nuwave\Lighthouse\Support\Contracts\GraphQLContext  $context Shared between all fields.
+     * @param  \GraphQL\Type\Definition\ResolveInfo  $resolveInfo Metadata for advanced query resolution.
+     * 
+     * @return mixed
      */
-    public function create($rootValue, array $args, GraphQLContext $context = null, ResolveInfo $resolveInfo)
+    public function create($root, array $args, GraphQLContext $context, ResolveInfo $resolveInfo)
     {
         $args = collect($args);
         $data = $args->except('directive')->toArray();
@@ -31,16 +31,16 @@ class SourceMutator extends BaseAuthResolver
     }
 
     /**
-     * @param $rootValue
-     * @param array                                                    $args
-     * @param \Nuwave\Lighthouse\Support\Contracts\GraphQLContext|null $context
-     * @param \GraphQL\Type\Definition\ResolveInfo                     $resolveInfo
+     * Return a value for the field.
      *
-     * @throws \Exception
-     *
-     * @return array
+     * @param  @param  null  $root Always null, since this field has no parent.
+     * @param  array<string, mixed>  $args The field arguments passed by the client.
+     * @param  \Nuwave\Lighthouse\Support\Contracts\GraphQLContext  $context Shared between all fields.
+     * @param  \GraphQL\Type\Definition\ResolveInfo  $resolveInfo Metadata for advanced query resolution.
+     * 
+     * @return mixed
      */
-    public function update($rootValue, array $args, GraphQLContext $context = null, ResolveInfo $resolveInfo)
+    public function update($root, array $args, GraphQLContext $context, ResolveInfo $resolveInfo)
     {
         $args = collect($args);
         $data = $args->except('directive')->toArray();

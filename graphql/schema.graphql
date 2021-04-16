@@ -37,3 +37,4 @@ type GroupUserPivot {
 #import status.graphql
 #import request.graphql
 #import note.graphql
+#import priority.graphql

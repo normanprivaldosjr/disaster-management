@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Priority;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\Request;
+
 class RequestSeeder extends Seeder
 {
     /**
@@ -19,15 +21,19 @@ class RequestSeeder extends Seeder
         $status = DB::table('statuses')->count();
         $sources = DB::table('sources')->count();
         $groups = DB::table('groups')->count();
-        for($x = 0; $x < 25; $x++){
+
+        for ($x = 0; $x < 25; $x++) {
             Request::factory()->create([
-                'priority' => 'pregnant,child,senior_citizen',
-                'user_id' => rand(1,$users),
-                'status_id' => rand(1,$status),
-                'source_id' => rand(1,$sources),
-                'group_id' => rand(1,$groups)
-            ]);  
+                'user_id' => rand(1, $users),
+                'status_id' => rand(1, $status),
+                'source_id' => rand(1, $sources),
+                'group_id' => rand(1, $groups)
+            ]);
         }
-      
+
+        foreach (Request::all() as $request) {
+            $priorities = Priority::inRandomOrder()->take(rand(1, 5))->pluck('id');
+            $request->priorities()->attach($priorities);
+        }
     }
 }

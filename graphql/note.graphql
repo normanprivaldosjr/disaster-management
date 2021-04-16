@@ -4,9 +4,9 @@ extend type Query @guard(with: ["api"]) {
 }
 
 extend type Mutation @guard(with: ["api"]) {
-    createNote(input: CreateNoteInput @spread): Note @field(resolver: "NoteMutator@create")
-    updateNote(input: UpdateNoteInput @spread): Note @field(resolver: "NoteMutator@update")
-    deleteNote(id: ID!): Note @field(resolver: "NoteMutator@delete")
+    createNote(input: CreateNoteInput @spread): NoteResponse @field(resolver: "NoteMutator@create")
+    updateNote(input: UpdateNoteInput @spread): NoteResponse @field(resolver: "NoteMutator@update")
+    deleteNote(id: ID!): NoteResponse @field(resolver: "NoteMutator@delete")
 }
 
 type Note {
@@ -18,9 +18,14 @@ type Note {
     updated_at: DateTime
 }
 
+type NoteResponse {
+    status: String
+    message: String
+    data: Note
+}
+
 input CreateNoteInput {
     request_id: ID!
-    user_id: ID!
     note: String!
 }
 

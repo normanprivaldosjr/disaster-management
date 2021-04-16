@@ -1,53 +1,57 @@
-- - - -
+## Disaster Management Backend
 
-Disaster Management Backend
-==================
+## Development tools
 
-Development tools
-----------------
-1. [Homebrew](https://brew.sh)
+1. [Homebrew](https://brew.sh/)
     - `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 2. [Composer](https://getcomposer.org)
     - `brew install composer`
+3. [PHP](https://www.php.net/)
+    - `brew install php`
+4. [MySQL](https://www.mysql.com/)
+    - `brew install mysql`
 
-Setup
-----------------
-1. Go to project directory and run:
+## Setup
+
+Go to project directory and run:
     ```sh
         composer install
     ```
-2. Then install passport:
+Make a copy of `.env.sample` and rename it to `.env`
+Create MYSQL Database named `disaster_management_db`
+Install passport:
     ```sh
         php artisan passport:install
     ```
-3. Run the migration
+Run the Migration
     ```sh
         php artisan migrate
     ```
-4. Make a copy of `.env.sample` and rename it to `.env`
-5. Configure the `.env` variables such as:
+Run the Database Seeder
     ```sh
-        DB_DATABASE
-        DB_USERNAME
-        DB_PASSWORD
-        
-        BROADCAST_DRIVER=pusher
-
-        GOOGLE_CLIENT_ID
-        GOOGLE_CLIENT_SECRET
-        GOOGLE_CLIENT_REDIRECT
-
-        FACEBOOK_APP_ID
-        FACEBOOK_APP_SECRET
-        FACEBOOK_APP_REDIRECT
-
-        PUSHER_APP_ID
-        PUSHER_APP_KEY
-        PUSHER_APP_SECRET
-        PUSHER_APP_CLUSTER
+        php artisan db:seed
     ```
-6. Run this command:
+Run Artisan Serve:
     ```sh
         php artisan serve
     ```
-7. Done!
+
+Local Dev Sites:
+- http://disaster-management.test/
+- http://localhost:8000/
+- http://127.0.0.1:8000/
+
+GraphQL Playground
+- http://disaster-management.test/graphql-playground
+- http://localhost:8000/graphql-playground
+- http://127.0.0.1:8000/graphql-playground
+
+## Facebook Test Users
+
+Email:
+- tggexdwhjj_1618306485@tfbnw.net
+- bshyajgylf_1618306485@tfbnw.net
+- ivoempnupf_1618306485@tfbnw.net
+- njztasfyzz_1618306485@tfbnw.net
+
+Password: admin12345

@@ -1,5 +1,8 @@
 extend type Query @guard(with: ["api"]) {
-    requests: [Request!]! @all
+    requests(
+        status_id: ID @scope(name: "byStatus")
+        priorities: [ID] @scope(name: "byPriority")
+    ): [Request!]! @paginate
     request(id: ID @eq): Request @find
 }
 
@@ -15,7 +18,7 @@ type Request {
     status: Status @belongsTo
     source: Source @belongsTo
     group: Group @belongsTo
-    priority: String
+    priorities: [Priority] @belongsToMany
     number_to_be_rescued: Int
     address: String
     contact_number: String
@@ -28,10 +31,10 @@ input CreateRequestInput {
     status_id: ID!
     source_id: ID!
     group_id: ID!
-    priority: String!
     number_to_be_rescued: Int
     address: String!
     contact_number: String!
+    priorities: [ID]
 }
 
 input UpdateRequestInput {
@@ -40,8 +43,8 @@ input UpdateRequestInput {
     status_id: ID
     source_id: ID
     group_id: ID
-    priority: String
     number_to_be_rescued: Int
     address: String
     contact_number: String
+    priorities: [ID]
 }

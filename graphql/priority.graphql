@@ -1,0 +1,17 @@
+extend type Query @guard(with: ["api"]) {
+    priorities: [Priority!]! @all
+    priority(id: ID @eq): Priority @find
+}
+
+type Priority {
+    id: ID
+    name: String
+    pivot: PriorityRequestPivot
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+type PriorityRequestPivot {
+    created_at: DateTime
+    updated_at: DateTime
+}

@@ -12,16 +12,16 @@ use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 class SocialLoginMutator extends BaseAuthResolver
 {
     /**
-     * @param $rootValue
-     * @param array                                                    $args
-     * @param \Nuwave\Lighthouse\Support\Contracts\GraphQLContext|null $context
-     * @param \GraphQL\Type\Definition\ResolveInfo                     $resolveInfo
+     * Return a value for the field.
      *
-     * @throws \Exception
-     *
-     * @return array
+     * @param  @param  null  $root Always null, since this field has no parent.
+     * @param  array<string, mixed>  $args The field arguments passed by the client.
+     * @param  \Nuwave\Lighthouse\Support\Contracts\GraphQLContext  $context Shared between all fields.
+     * @param  \GraphQL\Type\Definition\ResolveInfo  $resolveInfo Metadata for advanced query resolution.
+     * 
+     * @return mixed
      */
-    public function resolve($rootValue, array $args, GraphQLContext $context = null, ResolveInfo $resolveInfo)
+    public function resolve($root, array $args, GraphQLContext $context, ResolveInfo $resolveInfo)
     {
         $credentials = $this->buildCredentials($args, 'social');
 

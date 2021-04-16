@@ -19,7 +19,6 @@ class CreateRequestsTable extends Migration
             $table->foreignId('status_id')->constrained();
             $table->foreignId('source_id')->constrained();
             $table->foreignId('group_id')->constrained();
-            $table->string('priority');
             $table->integer('number_to_be_rescued');
             $table->string('address');
             $table->string('contact_number');

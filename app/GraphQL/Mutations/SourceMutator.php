@@ -2,12 +2,14 @@
 
 namespace App\GraphQL\Mutations;
 
+use App\GraphQL\Resolvers\BaseAuthResolver;
 use App\Models\Source;
 use GraphQL\Type\Definition\ResolveInfo;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
 use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 
-class SourceMutator
+class SourceMutator extends BaseAuthResolver
 {
     /**
      * @param $rootValue
@@ -23,10 +25,9 @@ class SourceMutator
     {
         $args = collect($args);
         $data = $args->except('directive')->toArray();
-
         $source = Source::create($data);
 
-        return $source;
+        return $this->apiResponse('SUCCESS', 'Created a new Source.', $source);
     }
 
     /**
@@ -41,15 +42,16 @@ class SourceMutator
      */
     public function update($rootValue, array $args, GraphQLContext $context = null, ResolveInfo $resolveInfo)
     {
-        try {
-            $args = collect($args);
-            $data = $args->except('directive')->toArray();
+        $args = collect($args);
+        $data = $args->except('directive')->toArray();
 
+        try {
             $source = Source::findOrFail($data['id']);
-            $source->update($data);
         } catch (ModelNotFoundException $e) {
-            throw new ModelNotFoundException(__('Source not found.'), 400);
+            return $this->apiResponse('INVALID_REQUEST', 'Source not found.');
         }
+        $source->update($data);
+        return $this->apiResponse('SUCCESS', 'Updated a source.', $source);
 
         return $source;
     }

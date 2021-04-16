@@ -4,8 +4,8 @@ extend type Query @guard(with: ["api"]) {
 }
 
 extend type Mutation @guard(with: ["api"]) {
-    createSource(input: CreateSourceInput @spread): Source @field(resolver:"SourceMutator@create")
-    updateSource(input: UpdateSourceInput @spread): Source @field(resolver:"SourceMutator@update")
+    createSource(input: CreateSourceInput @spread): SourceResponse @field(resolver:"SourceMutator@create")
+    updateSource(input: UpdateSourceInput @spread): SourceResponse @field(resolver:"SourceMutator@update")
 }
 
 
@@ -14,6 +14,12 @@ type Source {
     source: String
     created_at: DateTime
     updated_at: DateTime
+}
+
+type SourceResponse {
+    status: String
+    message: String
+    data: Source
 }
 
 input CreateSourceInput {

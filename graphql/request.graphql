@@ -19,7 +19,7 @@ type Request {
     source: Source @belongsTo
     group: Group @belongsTo
     priorities: [Priority] @belongsToMany
-    name_rescue: String
+    name: String
     number_to_be_rescued: Int
     address: String
     contact_number: String
@@ -38,7 +38,7 @@ input CreateRequestInput {
     source_id: ID!
     group_id: ID!
     number_to_be_rescued: Int
-    name_rescue: String!
+    name: String!
     address: String!
     contact_number: String!
     priorities: [ID]
@@ -51,7 +51,7 @@ input UpdateRequestInput {
     source_id: ID
     group_id: ID
     number_to_be_rescued: Int
-    name_rescue: String
+    name: String
     address: String
     contact_number: String
     priorities: [ID]

@@ -13,6 +13,7 @@ extend type Mutation @guard(with: ["api"]) {
 type Group {
     id: ID
     name: String
+    pivot: GroupUserPivot
     users: [User] @belongsToMany
     region: Region
     requestCount: Int @count(relation: "newRequests")

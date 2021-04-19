@@ -11,6 +11,7 @@ class Request extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'name',
         'user_id',
         'status_id',
         'source_id',

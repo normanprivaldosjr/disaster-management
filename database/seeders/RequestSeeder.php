@@ -22,7 +22,7 @@ class RequestSeeder extends Seeder
         $sources = DB::table('sources')->count();
         $groups = DB::table('groups')->count();
 
-        for ($x = 0; $x < 25; $x++) {
+        for ($x = 0; $x < 200; $x++) {
             Request::factory()->create([
                 'user_id' => rand(1, $users),
                 'status_id' => rand(1, $status),

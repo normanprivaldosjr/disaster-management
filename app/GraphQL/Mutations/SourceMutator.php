@@ -52,7 +52,5 @@ class SourceMutator extends BaseAuthResolver
         }
         $source->update($data);
         return $this->apiResponse('SUCCESS', 'Updated a source.', $source);
-
-        return $source;
     }
 }

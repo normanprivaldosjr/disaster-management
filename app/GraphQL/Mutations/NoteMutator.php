@@ -27,6 +27,7 @@ class NoteMutator extends BaseAuthResolver
         $data = $args->except('directive')->toArray();
         $user = Auth::user();
         $data['user_id'] = $user->id;
+
         $note = Note::create($data);
 
         return $this->apiResponse('SUCCESS', 'Created a note.', $note);
@@ -53,6 +54,7 @@ class NoteMutator extends BaseAuthResolver
         } catch (ModelNotFoundException $e) {
             return $this->apiResponse('INVALID_REQUEST', 'Note not found.');
         }
+
         $is_creator = $note->user()->where('id', '=', $user->id)->count();
 
         if (!$is_creator) {
@@ -60,7 +62,7 @@ class NoteMutator extends BaseAuthResolver
         }
 
         $note->update($data);
-        
+
         return $this->apiResponse('SUCCESS', 'Updated a note.', $note);
     }
 

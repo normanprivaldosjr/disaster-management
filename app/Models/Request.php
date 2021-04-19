@@ -52,6 +52,15 @@ class Request extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function scopeByGroup($query, $group_id)
+    {
+        if (empty($group_id)) {
+            return $query;
+        }
+
+        return $query->where('group_id', '=', $group_id);
+    }
+
     public function scopeByPriority($query, $priorities)
     {
         if (empty($priorities)) {

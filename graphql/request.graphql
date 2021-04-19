@@ -3,7 +3,7 @@ extend type Query @guard(with: ["api"]) {
         group_id: ID @scope(name: "byGroup")
         status_id: ID @scope(name: "byStatus")
         priorities: [ID] @scope(name: "byPriority")
-    ): [Request!]! @paginate
+    ): [Request!]! @paginate @orderBy(column: "created_at", direction: "DESC")
     request(id: ID @eq): Request @find
 }
 

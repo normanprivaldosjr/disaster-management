@@ -1,5 +1,5 @@
 extend type Query @guard(with: ["api"]) {
-    groups: [Group!]! @all
+    groups: [Group!]! @all @orderBy(column: "created_at", direction: "DESC")
     group(id: ID @eq): Group @find
 }
 

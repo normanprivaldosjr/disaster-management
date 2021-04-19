@@ -7,8 +7,10 @@ use App\Models\Request;
 use GraphQL\Type\Definition\ResolveInfo;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
+use App\GraphQL\Resolvers\BaseAuthResolver;
+use Illuminate\Support\Facades\Auth;
 
-class RequestMutator
+class RequestMutator extends BaseAuthResolver
 {
     /**
      * Return a value for the field.
@@ -24,6 +26,8 @@ class RequestMutator
     {
         $args = collect($args);
         $data = $args->except('directive', 'priorities')->toArray();
+        $user = Auth::user();
+        $data['user_id'] = $user->id;
 
         $request = Request::create($data);
 
@@ -33,7 +37,7 @@ class RequestMutator
 
         broadcast(new NewRequest($request))->toOthers();
 
-        return $request;
+        return $this->apiResponse('SUCCESS', 'Created a request.', $request);
     }
 
     /**
@@ -50,11 +54,13 @@ class RequestMutator
     {
         $args = collect($args);
         $data = $args->except('directive', 'priorities')->toArray();
+        $user = Auth::user();
+        $data['user_id'] = $user->id;
 
         try {
             $request = Request::findOrFail($data['id']);
         } catch (ModelNotFoundException $e) {
-            throw new ModelNotFoundException(__('Request not found.'), 400);
+            return $this->apiResponse('INVALID_REQUEST', 'Request not found.');
         }
 
         if ($args->get('priorities')) {
@@ -63,7 +69,7 @@ class RequestMutator
 
         $request->update($data);
 
-        return $request;
+        return $this->apiResponse('SUCCESS', 'Updated a Request.', $request);
     }
 
     /**
@@ -78,16 +84,17 @@ class RequestMutator
      */
     public function delete($root, array $args, GraphQLContext $context, ResolveInfo $resolveInfo)
     {
-        try {
-            $args = collect($args);
-            $data = $args->except('directive')->toArray();
+        $args = collect($args);
+        $data = $args->except('directive')->toArray();
 
+        try {
             $request = Request::findOrFail($data['id']);
-            $request->delete($data);
         } catch (ModelNotFoundException $e) {
-            throw new ModelNotFoundException(__('Request not found.'), 400);
+            return $this->apiResponse('INVALID_REQUEST', 'Request not found.', $request);
         }
 
-        return $request;
+        $request->delete($data);
+
+        return $this->apiResponse('SUCCESS', 'Successfully deleted a request.', $request);
     }
 }

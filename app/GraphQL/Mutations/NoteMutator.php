@@ -76,16 +76,17 @@ class NoteMutator extends BaseAuthResolver
      */
     public function delete($root, array $args, GraphQLContext $context, ResolveInfo $resolveInfo)
     {
-        try {
-            $args = collect($args);
-            $data = $args->except('directive')->toArray();
+        $args = collect($args);
+        $data = $args->except('directive')->toArray();
 
+        try {
             $note = Note::findOrFail($data['id']);
-            $note->delete($data);
         } catch (ModelNotFoundException $e) {
-            throw new ModelNotFoundException(__('Note not found.'), 400);
+            return $this->apiResponse('INVALID_REQUEST', 'Note not found.', $note);
         }
 
-        return $note;
+        $note->delete($data);
+
+        return $this->apiResponse('SUCCESS', 'Successfully deleted a note.', $note);
     }
 }

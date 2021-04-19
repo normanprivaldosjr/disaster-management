@@ -7,9 +7,9 @@ extend type Query @guard(with: ["api"]) {
 }
 
 extend type Mutation @guard(with: ["api"]) {
-    createRequest(input: CreateRequestInput @spread): Request @field(resolver: "RequestMutator@create")
-    updateRequest(input: UpdateRequestInput @spread): Request @field(resolver: "RequestMutator@update")
-    deleteRequest(id: ID!): Request @field(resolver: "RequestMutator@delete")
+    createRequest(input: CreateRequestInput @spread): RequestResponse @field(resolver: "RequestMutator@create")
+    updateRequest(input: UpdateRequestInput @spread): RequestResponse @field(resolver: "RequestMutator@update")
+    deleteRequest(id: ID!): RequestResponse @field(resolver: "RequestMutator@delete")
 }
 
 type Request {
@@ -19,6 +19,7 @@ type Request {
     source: Source @belongsTo
     group: Group @belongsTo
     priorities: [Priority] @belongsToMany
+    name_rescue: String
     number_to_be_rescued: Int
     address: String
     contact_number: String
@@ -26,12 +27,18 @@ type Request {
     updated_at: DateTime
 }
 
+type RequestResponse {
+    status: String
+    message: String
+    data: Request
+}
+
 input CreateRequestInput {
-    user_id: ID!
     status_id: ID!
     source_id: ID!
     group_id: ID!
     number_to_be_rescued: Int
+    name_rescue: String!
     address: String!
     contact_number: String!
     priorities: [ID]
@@ -44,6 +51,7 @@ input UpdateRequestInput {
     source_id: ID
     group_id: ID
     number_to_be_rescued: Int
+    name_rescue: String
     address: String
     contact_number: String
     priorities: [ID]

@@ -14,9 +14,9 @@
 
 Go to project directory and run:
 
-    ```sh
-        composer install
-    ```
+```sh
+composer install
+```
 
 Make a copy of `.env.sample` and rename it to `.env`
 
@@ -24,21 +24,21 @@ Create MYSQL Database named `disaster_management_db`
 
 Install passport:
 
-    ```sh
-        php artisan passport:install
-    ```
+```sh
+php artisan passport:install
+```
 
 Run the Migration with Seeder
 
-    ```sh
-        php artisan migrate:fresh --seed
-    ```
+```sh
+php artisan migrate:fresh --seed
+```
 
 Run Artisan Serve
 
-    ```sh
-        php artisan serve
-    ```
+```sh
+php artisan serve
+```
 
 Local Dev Sites:
 - http://disaster-management.test/

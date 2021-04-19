@@ -19,6 +19,7 @@ type User {
     name: String!
     email: String!
     pivot: GroupUserPivot
+    groups: [Group] @belongsToMany
     created_at: DateTime!
     updated_at: DateTime!
 }

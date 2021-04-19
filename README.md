@@ -2,36 +2,40 @@
 
 ## Development tools
 
-1. [Homebrew](https://brew.sh/)
-    - `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
-2. [Composer](https://getcomposer.org)
-    - `brew install composer`
-3. [PHP](https://www.php.net/)
-    - `brew install php`
-4. [MySQL](https://www.mysql.com/)
-    - `brew install mysql`
+[Homebrew](https://brew.sh/) — `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+
+[Composer](https://getcomposer.org) — `brew install composer`
+
+[PHP](https://www.php.net/) — `brew install php`
+
+[MySQL](https://www.mysql.com/) — `brew install mysql`
 
 ## Setup
 
 Go to project directory and run:
+
     ```sh
         composer install
     ```
+
 Make a copy of `.env.sample` and rename it to `.env`
+
 Create MYSQL Database named `disaster_management_db`
+
 Install passport:
+
     ```sh
         php artisan passport:install
     ```
-Run the Migration
+
+Run the Migration with Seeder
+
     ```sh
-        php artisan migrate
+        php artisan migrate:fresh --seed
     ```
-Run the Database Seeder
-    ```sh
-        php artisan db:seed
-    ```
-Run Artisan Serve:
+
+Run Artisan Serve
+
     ```sh
         php artisan serve
     ```

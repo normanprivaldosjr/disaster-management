@@ -1,5 +1,6 @@
 extend type Query @guard(with: ["api"]) {
     requests(
+        group_id: ID @scope(name: "byGroup")
         status_id: ID @scope(name: "byStatus")
         priorities: [ID] @scope(name: "byPriority")
     ): [Request!]! @paginate

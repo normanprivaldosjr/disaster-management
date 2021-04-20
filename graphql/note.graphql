@@ -25,13 +25,12 @@ type NoteResponse {
 }
 
 input CreateNoteInput {
-    request_id: ID!
-    note: String!
+    request_id: ID! @rules(apply: ["required"])
+    note: String! @rules(apply: ["required"])
 }
 
 input UpdateNoteInput {
-    id: ID!
+    id: ID! @rules(apply: ["required"])
     request_id: ID
-    user_id: ID
     note: String
 }

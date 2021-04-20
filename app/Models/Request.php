@@ -76,12 +76,12 @@ class Request extends Model
         return $query;
     }
 
-    public function scopeByStatus($query, $status_id)
+    public function scopeByStatus($query, $status_ids)
     {
-        if (!$status_id) {
+        if (empty($status_ids)) {
             return $query;
         }
 
-        return $query->where('status_id', '=', $status_id);
+        return $query->whereIn('status_id', $status_ids);
     }
 }

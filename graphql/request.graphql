@@ -1,7 +1,7 @@
 extend type Query @guard(with: ["api"]) {
     requests(
         group_id: ID @scope(name: "byGroup")
-        status_id: ID @scope(name: "byStatus")
+        status_ids: [ID] @scope(name: "byStatus")
         priorities: [ID] @scope(name: "byPriority")
     ): [Request!]! @paginate @orderBy(column: "created_at", direction: "DESC")
     request(id: ID @eq): Request @find

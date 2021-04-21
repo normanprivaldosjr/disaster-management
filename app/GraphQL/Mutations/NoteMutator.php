@@ -46,11 +46,11 @@ class NoteMutator extends BaseAuthResolver
     public function update($root, array $args, GraphQLContext $context, ResolveInfo $resolveInfo)
     {
         $args = collect($args);
-        $data = $args->except('directive')->toArray();
+        $data = $args->except('directive', 'id')->toArray();
         $user = Auth::user();
 
         try {
-            $note = Note::findOrFail($data['id']);
+            $note = Note::findOrFail($args->get('id'));
         } catch (ModelNotFoundException $e) {
             return $this->apiResponse('INVALID_REQUEST', 'Note not found.');
         }

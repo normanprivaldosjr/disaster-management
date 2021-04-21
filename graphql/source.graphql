@@ -23,10 +23,10 @@ type SourceResponse {
 }
 
 input CreateSourceInput {
-    source: String!
+    source: String! @rules(apply: ["required"])
 }
 
 input UpdateSourceInput {
-    id: ID!
+    id: ID! @rules(apply: ["required"])
     source: String
 }

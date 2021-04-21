@@ -43,10 +43,10 @@ class SourceMutator extends BaseAuthResolver
     public function update($root, array $args, GraphQLContext $context, ResolveInfo $resolveInfo)
     {
         $args = collect($args);
-        $data = $args->except('directive')->toArray();
+        $data = $args->except('directive', 'id')->toArray();
 
         try {
-            $source = Source::findOrFail($data['id']);
+            $source = Source::findOrFail($args->get('id'));
         } catch (ModelNotFoundException $e) {
             return $this->apiResponse('INVALID_REQUEST', 'Source not found.');
         }

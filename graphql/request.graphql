@@ -35,18 +35,18 @@ type RequestResponse {
 }
 
 input CreateRequestInput {
-    status_id: ID!
-    source_id: ID!
-    group_id: ID!
+    status_id: ID! @rules(apply: ["required"])
+    source_id: ID! @rules(apply: ["required"])
+    group_id: ID! @rules(apply: ["required"])
     number_to_be_rescued: Int
-    name: String!
-    address: String!
-    contact_number: String!
+    name: String! @rules(apply: ["required"])
+    address: String! @rules(apply: ["required"])
+    contact_number: String! @rules(apply: ["required"])
     priorities: [ID]
 }
 
 input UpdateRequestInput {
-    id: ID!
+    id: ID! @rules(apply: ["required"])
     user_id: ID
     status_id: ID
     source_id: ID

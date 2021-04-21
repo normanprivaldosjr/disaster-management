@@ -53,12 +53,13 @@ class RequestMutator extends BaseAuthResolver
     public function update($root, array $args, GraphQLContext $context, ResolveInfo $resolveInfo)
     {
         $args = collect($args);
-        $data = $args->except('directive', 'priorities')->toArray();
+        $data = $args->except('directive', 'priorities', 'id')->toArray();
+
         $user = Auth::user();
         $data['user_id'] = $user->id;
 
         try {
-            $request = Request::findOrFail($data['id']);
+            $request = Request::findOrFail($args->get('id'));
         } catch (ModelNotFoundException $e) {
             return $this->apiResponse('INVALID_REQUEST', 'Request not found.');
         }

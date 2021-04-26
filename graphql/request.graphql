@@ -20,6 +20,7 @@ type Request {
     source: Source @belongsTo
     group: Group @belongsTo
     priorities: [Priority] @belongsToMany
+    notes: [Note] @hasMany
     name: String
     number_to_be_rescued: Int
     address: String

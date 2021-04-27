@@ -26,6 +26,7 @@ class RequestMutator extends BaseAuthResolver
     {
         $args = collect($args);
         $data = $args->except('directive', 'priorities')->toArray();
+
         $user = Auth::user();
         $data['user_id'] = $user->id;
 
@@ -54,9 +55,6 @@ class RequestMutator extends BaseAuthResolver
     {
         $args = collect($args);
         $data = $args->except('directive', 'priorities', 'id')->toArray();
-
-        $user = Auth::user();
-        $data['user_id'] = $user->id;
 
         try {
             $request = Request::findOrFail($args->get('id'));

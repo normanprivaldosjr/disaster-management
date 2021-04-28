@@ -1,5 +1,6 @@
 extend type Query @guard(with: ["api"]) {
     requests(
+        assignment: Assignment @scope(name: "byAssignment")
         group_id: ID @scope(name: "byGroup")
         status_ids: [ID] @scope(name: "byStatus")
         priorities: [ID] @scope(name: "byPriority")
@@ -19,6 +20,7 @@ type Request {
     status: Status @belongsTo
     source: Source @belongsTo
     group: Group @belongsTo
+    creator: User @belongsTo
     priorities: [Priority] @belongsToMany
     notes: [Note] @hasMany
     name: String
@@ -57,4 +59,9 @@ input UpdateRequestInput {
     address: String
     contact_number: String
     priorities: [ID]
+}
+
+enum Assignment {
+    Assigned
+    Unassigned
 }

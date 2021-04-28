@@ -123,13 +123,15 @@
 
                     <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
                         Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
-                        <a href="{{ url('auth/redirect/google') }}" class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-                            Login With Google
-                        </a>
-                        ----
-                        <a href="{{ url('auth/redirect/facebook') }}" class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-                            Login With Facebook
-                        </a>
+                        @if (env('APP_ENV') === 'local')
+                            <a href="{{ url('auth/redirect/google') }}" class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
+                                Login With Google
+                            </a>
+                            ----
+                            <a href="{{ url('auth/redirect/facebook') }}" class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
+                                Login With Facebook
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>

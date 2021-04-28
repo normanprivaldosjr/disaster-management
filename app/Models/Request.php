@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Request extends Model
 {
@@ -16,6 +17,7 @@ class Request extends Model
         'status_id',
         'source_id',
         'group_id',
+        'creator_id',
         'number_to_be_rescued',
         'address',
         'contact_number',
@@ -50,6 +52,26 @@ class Request extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'creator_id');
+    }
+
+    public function scopeByAssignment($query, $assignment)
+    {
+        if (empty($assignment)) {
+            return $query;
+        }
+
+        if ($assignment === 'Assigned') {
+            $user = Auth::user();
+
+            return $query->where('user_id', '=', $user->id);
+        }
+
+        return $query->whereNull('user_id');
     }
 
     public function scopeByGroup($query, $group_id)

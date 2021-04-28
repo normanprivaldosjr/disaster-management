@@ -27,7 +27,8 @@ class RequestSeeder extends Seeder
                 'user_id' => rand(1, $users),
                 'status_id' => rand(1, $status),
                 'source_id' => rand(1, $sources),
-                'group_id' => rand(1, $groups)
+                'group_id' => rand(1, $groups),
+                'creator_id' => rand(1, $users),
             ]);
         }
 

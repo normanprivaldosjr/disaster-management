@@ -22,16 +22,17 @@ Make a copy of `.env.sample` and rename it to `.env`
 
 Create MYSQL Database named `disaster_management_db`
 
-Install passport:
-
-```sh
-php artisan passport:install
-```
 
 Run the Migration with Seeder
 
 ```sh
 php artisan migrate:fresh --seed
+```
+
+Install passport:
+
+```sh
+php artisan passport:install
 ```
 
 Run Artisan Serve

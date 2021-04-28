@@ -21,8 +21,9 @@ class GroupFactory extends Factory
      */
     public function definition()
     {
+
         return [
-            'name' => 'Group '. $this->faker->name,
+            'name' => 'Group '. $this->faker->word,
         ];
     }
 }

@@ -15,10 +15,11 @@ class CreateRequestsTable extends Migration
     {
         Schema::create('requests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->nullable()->constrained();
             $table->foreignId('status_id')->constrained();
             $table->foreignId('source_id')->constrained();
             $table->foreignId('group_id')->constrained();
+            $table->foreignId('creator_id')->references('id')->on('users');
             $table->string('name');
             $table->integer('number_to_be_rescued');
             $table->string('address');

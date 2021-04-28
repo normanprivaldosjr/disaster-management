@@ -28,7 +28,7 @@ class RequestMutator extends BaseAuthResolver
         $data = $args->except('directive', 'priorities')->toArray();
 
         $user = Auth::user();
-        $data['user_id'] = $user->id;
+        $data['creator_id'] = $user->id;
 
         $request = Request::create($data);
 

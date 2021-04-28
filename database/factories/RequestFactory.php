@@ -21,11 +21,13 @@ class RequestFactory extends Factory
      */
     public function definition()
     {
+        $fakerPH = \Faker\Factory::create('en_PH');
+
         return [
-            'name' => $this->faker->name,
+            'name' => $fakerPH->name,
             'number_to_be_rescued' => rand(1,5),
-            'address' => $this->faker->address,
-            'contact_number' => $this->faker->phoneNumber
+            'address' => $fakerPH->address,
+            'contact_number' => $fakerPH->mobileNumber
         ];
     }
 }

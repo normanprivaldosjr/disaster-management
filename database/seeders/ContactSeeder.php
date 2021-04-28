@@ -15,15 +15,27 @@ class ContactSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(string $type='default')
     {
         $regions = json_decode(DB::table('regions')->get(),true);
+        $name_contacts = ['Red Cross', 'Cost Guard'];
+        $num_of_contacts = rand(1,4);
         foreach($regions as $region){
-            $num_of_contacts = rand(1,4);
+            if($type=='demo'){
+                foreach($name_contacts as $name){
+                    Contact::factory()->create([
+                        'region_id' => $region['id'],
+                        'rescuers' => $name.' '.$region['region'],
+                    ]);
+                }
+            }
+            else{
+                Contact::factory()->count($num_of_contacts)->create([
+                    'region_id' => $region['id'],
+                ]);   
+    
+            }
 
-            $contact = Contact::factory()->count($num_of_contacts)->create([
-                'region_id' => $region['id'],
-            ]);   
         }
 
     }

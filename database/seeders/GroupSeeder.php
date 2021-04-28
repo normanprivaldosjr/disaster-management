@@ -14,15 +14,26 @@ class GroupSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(string $type='default')
     {
-        $regions = json_decode(DB::table('regions')->get(),true);
-        foreach($regions as $region){
-            $num_of_groups = rand(1,2);
-
-            $group = Group::factory()->count($num_of_groups)->create([
-                'region_id' => $region['id'],
-            ]);   
+        if($type == 'demo'){
+            $demo_region = ['Region I', 'Region II', 'Region III'];
+            foreach($demo_region as $region){
+                $curr_reg = DB::table('regions')->where('region',$region)->first();
+                Group::factory()->create([
+                    'region_id' => $curr_reg->id,
+                ]); 
+            }
+    
+        }else{
+            $regions = json_decode(DB::table('regions')->get(),true);
+            foreach($regions as $region){
+                $num_of_groups = rand(1,2);
+                Group::factory()->count($num_of_groups)->create([
+                    'region_id' => $region['id'],
+                ]);   
+            }
+    
         }
     }
 }

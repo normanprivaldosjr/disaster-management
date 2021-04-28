@@ -21,9 +21,11 @@ class ContactFactory extends Factory
      */
     public function definition()
     {
+        $fakerPH = \Faker\Factory::create('en_PH');
+
         return [
-            'rescuers' => $this->faker->name,
-            'contact_no' => $this->faker->phoneNumber
+            'rescuers' => $this->faker->name(),
+            'contact_no' => $fakerPH->mobileNumber,
         ];
     }
 }

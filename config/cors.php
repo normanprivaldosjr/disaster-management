@@ -15,11 +15,11 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie', 'graphql/*', '*'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie', 'graphql', '*'],
 
     'allowed_methods' => ['POST', 'GET', 'DELETE', 'PUT', '*'],
 
-    'allowed_origins' => explode(',', env('CORS_ALLOWED_ORIGINS', 'http://localhost:4200,http://request-rescue-ph.herokuapp.com/')),
+    'allowed_origins' => ['*'],
 
     'allowed_origins_patterns' => [],
 

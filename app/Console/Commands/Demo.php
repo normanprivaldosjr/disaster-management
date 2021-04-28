@@ -56,7 +56,9 @@ class Demo extends Command
         $PrioritySeeder = new PrioritySeeder();
         $RequestSeeder = new RequestSeeder();
         $GroupUserSeeder = new GroupUserSeeder();
+
         $this->call('migrate:refresh');
+        $this->call('passport:install');
         $UserSeeder->run($type);
         $RegionSeeder->run($type);
         $StatusSeeder->run($type);

@@ -18,14 +18,23 @@ class RequestSeeder extends Seeder
     public function run()
     {
         $users = DB::table('users')->count();
-        $status = DB::table('statuses')->count();
+        $statuses = DB::table('statuses')->count();
         $sources = DB::table('sources')->count();
         $groups = DB::table('groups')->count();
-
+       
         for ($x = 0; $x < 200; $x++) {
+
+            $status = rand(1, $statuses);
+            if($status==1){
+                $user_id = NULL;
+            }
+            else{
+                $user_id = rand(1,$users);
+            }
+
             Request::factory()->create([
-                'user_id' => rand(1, $users),
-                'status_id' => rand(1, $status),
+                'user_id' => $user_id,
+                'status_id' => $status,
                 'source_id' => rand(1, $sources),
                 'group_id' => rand(1, $groups),
                 'creator_id' => rand(1, $users),
